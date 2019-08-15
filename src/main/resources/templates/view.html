@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View page</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Product Details</h1>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-xs-6" th:object="${product}">
+            <div class="thumbnail">
+                <img class="img-responsive" th:src="${product.getImage()}" alt="">
+                <div class="caption">
+                    <h3 th:text="${product.getName()}"></h3>
+                    <h4 th:text=" '$ ' + ${product.getPrice()}"></h4>
+                    <p th:text="${product.getDescription()}"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-6">
+            <p th:text="${product.getContent()}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

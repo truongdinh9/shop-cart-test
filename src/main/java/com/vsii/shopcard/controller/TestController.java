@@ -95,6 +95,10 @@ public class TestController {
         }
         return modelAndView;
     }
+    @GetMapping("/view-product/{id}")
+    ModelAndView view(@PathVariable Long id){
+        return new ModelAndView("view","product",productRepo.findById(id).get());
+    }
 
     private Item indexOfProduct(List<Item> cart, Product product) {
         try {
