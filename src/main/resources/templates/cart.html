@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body class="container">
+<div class="col-lg-12">
+    <h1 class="page-header">Shopping Cart</h1>
+</div>
+<div class="panel panel-success">
+    <div class="panel-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Sub Total</th>
+                <th><span class="label label-info pull-right" th:if="${cart}" th:text="'Total: ' + ${cart.size()} + ' products'" style="float:left!important; background-color: inherit; color: red; font-size: 100%;"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item: ${cart}">
+                <td th:text="${item.product.name}"></td>
+                <td th:text="'$' + ${item.product.price}"></td>
+                <td>
+                    <div class="col-lg-2">
+                        <a class="btn btn-xs btn-default" th:href="@{/cart/subQuantity/__${item.product.id}__}">-</a>
+                    </div>
+                    <div class="col-lg-2" th:text="${item.quantity}"></div>
+                    <div class="col-lg-2">
+                        <a class="btn btn-xs btn-default" th:href="@{/cart/addQuantity/__${item.product.id}__}">+</a>
+                    </div>
+                </td>
+                <td th:text="'$' + ${item.quantity} * ${item.product.price}"></td>
+                <td>
+                    <a class="btn btn-warning" th:href="@{/cart/remove/__${item.product.id}__}">Remove</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="padding_30" style="padding: 30px;">
+            <div class="container">
+                <div class="col-lg-8">
+                    <h3 th:text="'Amount : $' + ${amount}" style="margin-top: 0!important;"></h3>
+                </div>
+                <div class="col-lg-2">
+                    <a class="btn btn-danger pull-right" th:href="@{/cart/delete}" style="margin-left: 30px; position: absolute;">Delete Cart</a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a th:href="@{/}"><==== Back to shop</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kumeo's Shop</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <h1 class="page-header">Best Selling Products</h1>
+        </div>
+        <div class="col-lg-2">
+            <a th:href="@{/cart}" class="btn btn-default btn-sm" style="margin-top: 50px">View Cart</a>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-xs-6" th:each="product : ${products}">
+            <div class="thumbnail">
+                <img class="img-responsive" th:src="${product.getImage()}" alt="" style="height: 200px">
+                <div class="caption">
+                    <h3 th:text="${product.getName()}"></h3>
+                    <h4 th:text=" '$ ' + ${product.getPrice()}"></h4>
+                    <p th:text="${product.getDescription()}"></p>
+                    <a th:href="@{/view-product/__${product.getId()}__}" class="btn btn-info btn-sm" role="button">View</a>
+                    <a th:href="@{/cart/buy/__${product.getId()}__?quantity=1}" class="btn btn-default btn-sm" role="button">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
